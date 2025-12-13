@@ -7,7 +7,6 @@ df = pd.read_csv('data.csv')
 df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors='coerce')
 
 selected_features = ['tenure', 'MonthlyCharges', 'TotalCharges']
-print("--- İstatistiksel Özet (Mean, Median, Variance, Std) ---")
 stats = df[selected_features].agg(['mean', 'median', 'var', 'std']).transpose()
 print(stats.round(2))
 
@@ -37,4 +36,3 @@ plt.figure(figsize=(8, 5))
 sns.scatterplot(x='tenure', y='TotalCharges', hue='Churn', data=df, alpha=0.6)
 plt.title('Süre ve Toplam Ücret İlişkisi (Scatter Plot)')
 plt.show()
-print("EDA tamamlandi.")
