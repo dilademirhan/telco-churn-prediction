@@ -13,20 +13,19 @@ X = df.drop('Churn', axis=1)
 y = df['Churn']
 
 # Train/Test Split (70% Train, 30% Test)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=30)
 
 models = {
-    "Decision Tree": DecisionTreeClassifier(random_state=42),
+    "Decision Tree": DecisionTreeClassifier(random_state=30),
     "Naive Bayes": GaussianNB(),
-    "SVM": SVC(probability=True, random_state=42)
+    "SVM": SVC(probability=True, random_state=30)
 }
 
 results = []
 confusion_matrices = {} # Store matrices for later plotting
 
-# --- 1. MODEL TRAINING AND ROC CURVE PLOTTING ---
-print("--- Training Models and Generating ROC Curve... ---")
-plt.figure(figsize=(10, 8)) # Initialize ROC plot area
+print("Training Models and Generating ROC Curve..")
+plt.figure(figsize=(8, 6)) # Initialize ROC plot area
 
 for name, model in models.items():
     # Train the Model
@@ -49,7 +48,7 @@ for name, model in models.items():
     
     # Add results to the list
     results.append([name, acc, prec, rec, f1, auc])
-    
+
     # Plot ROC Curve
     fpr, tpr, _ = roc_curve(y_test, y_prob)
     plt.plot(fpr, tpr, label=f"{name} (AUC = {auc:.2f})")
@@ -62,20 +61,18 @@ plt.title('ROC Curves Comparison')
 plt.legend()
 plt.show()
 
-# --- 2. CONFUSION MATRIX VISUALIZATION ---
-# 'print' ifadesini sadeleştirdik. Bu, kodun çalıştığını bilmen için faydalı.
-print("\n--- Generating Confusion Matrix Plots... ---")
+# Confusion Matrix Visualition
+print("\n Generating Confusion Matrix Plots..")
 for name, cm in confusion_matrices.items():
     plt.figure(figsize=(6, 5))
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', cbar=False)
     plt.title(f'{name} Confusion Matrix')
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
-    plt.show() # Opens a separate window for each model
+    plt.show() 
 
-# --- 3. RESULTS TABLE ---
 results_df = pd.DataFrame(results, columns=["Model", "Accuracy", "Precision", "Recall", "F1 Score", "ROC-AUC"])
-print("\n--- Model Comparison Table ---")
+print("\n Model Comparison Table")
 print(results_df)
 
 best_model = results_df.sort_values(by="F1 Score", ascending=False).iloc[0]
