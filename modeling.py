@@ -7,7 +7,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, roc_auc_score, roc_curve
 
-df = pd.read_csv("clean_data.csv")
+df = pd.read_csv("data/clean_data.csv")
 
 X = df.drop('Churn', axis=1)
 y = df['Churn']
