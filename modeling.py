@@ -12,7 +12,6 @@ df = pd.read_csv("data/clean_data.csv")
 X = df.drop('Churn', axis=1)
 y = df['Churn']
 
-# Train/Test Split (70% Train, 30% Test)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=30)
 
 models = {
@@ -22,38 +21,32 @@ models = {
 }
 
 results = []
-confusion_matrices = {} # Store matrices for later plotting
+confusion_matrices = {} 
 
 print("Training Models and Generating ROC Curve..")
-plt.figure(figsize=(8, 6)) # Initialize ROC plot area
+plt.figure(figsize=(8, 6)) 
 
 for name, model in models.items():
-    # Train the Model
+
     model.fit(X_train, y_train)
     
-    # Predict
     y_pred = model.predict(X_test)
     y_prob = model.predict_proba(X_test)[:, 1]
     
-    # Calculate Metrics
     acc = accuracy_score(y_test, y_pred)
     prec = precision_score(y_test, y_pred)
     rec = recall_score(y_test, y_pred)
     f1 = f1_score(y_test, y_pred)
     auc = roc_auc_score(y_test, y_prob)
     
-    # Calculate and store Confusion Matrix
     cm = confusion_matrix(y_test, y_pred)
     confusion_matrices[name] = cm
     
-    # Add results to the list
     results.append([name, acc, prec, rec, f1, auc])
 
-    # Plot ROC Curve
     fpr, tpr, _ = roc_curve(y_test, y_prob)
     plt.plot(fpr, tpr, label=f"{name} (AUC = {auc:.2f})")
 
-# Finalize and Show ROC Plot
 plt.plot([0, 1], [0, 1], 'k--', label='Random Guess') 
 plt.xlabel('False Positive Rate')
 plt.ylabel('True Positive Rate')
@@ -61,7 +54,6 @@ plt.title('ROC Curves Comparison')
 plt.legend()
 plt.show()
 
-# Confusion Matrix Visualition
 print("\n Generating Confusion Matrix Plots..")
 for name, cm in confusion_matrices.items():
     plt.figure(figsize=(6, 5))
