@@ -30,14 +30,11 @@ Three supervised learning algorithms were trained and evaluated:
 * **Naive Bayes:** Used as a probabilistic baseline model.
 * **Decision Tree:** Implemented to capture hierarchical decision rules.
 
-## Results
-Given the imbalanced nature of the data, the models were evaluated focusing on **Recall** (to minimize missed churners) and **F1-Score**, alongside Accuracy and ROC-AUC.
-
 | Model | Accuracy | Recall | Precision | F1-Score | ROC-AUC |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **SVM** | **79.00%** | **84.00%** | **77.00%** | **80.00%** | **0.860** |
-| Naive Bayes | 77.00% | 81.00% | 76.00% | 78.00% | 0.840 |
-| Decision Tree | 75.00% | 76.00% | 76.00% | 76.00% | 0.750 |
+| **SVM** | **0.79** | **0.84** | **0.77** | **0.80** | **0.86** |
+| Naive Bayes | 0.77 | 0.81 | 0.76 | 0.78 | 0.84 |
+| Decision Tree | 0.75 | 0.76 | 0.76 | 0.76 | 0.75 |
 
 > **Key Finding:** The **SVM model** outperformed others, achieving the highest **Recall (84%)** and **AUC (0.86)**. While Decision Tree and Naive Bayes provided competitive results, SVM demonstrated superior capability in distinguishing between Churn and Non-Churn customers.
 
@@ -47,3 +44,17 @@ Given the imbalanced nature of the data, the models were evaluated focusing on *
 ```bash
 git clone [https://github.com/dilademirhan/telco-churn-prediction.git](https://github.com/dilademirhan/telco-churn-prediction.git) Data_Mining_Project
 cd Data_Mining_Project
+```
+### 2. Install dependencies
+```bash
+pip install pandas numpy scikit-learn matplotlib seaborn imbalanced-learn
+```
+### 3. Run the Analysis
+For EDA and Visualizations:
+```bash
+python eda.py
+```
+For Model Training and Evaluation:
+```bash
+python modeling.py
+```
