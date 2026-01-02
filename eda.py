@@ -3,7 +3,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 df = pd.read_csv('data/data.csv')
-
 df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors='coerce')
 
 selected_features = ['tenure', 'MonthlyCharges', 'TotalCharges']
