@@ -19,7 +19,6 @@ models = {
     "Naive Bayes": GaussianNB(),
     "SVM": SVC(probability=True, random_state=30)
 }
-
 results = []
 confusion_matrices = {} 
 
