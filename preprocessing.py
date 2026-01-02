@@ -22,11 +22,8 @@ y = df['Churn']
 
 smote = SMOTE(random_state=30)
 X_res, y_res = smote.fit_resample(X, y)
-
 X_df = pd.DataFrame(X_res, columns=X.columns)
-
 y_df = pd.DataFrame(y_res, columns=['Churn'])
 
 clean_data = pd.concat([X_df, y_df], axis=1)
-
 clean_data.to_csv("clean_data.csv", index=False)
